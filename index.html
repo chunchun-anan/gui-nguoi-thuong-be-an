@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tặng Bé Yêu 💝</title>
+  <style>
+  body {
+  background: url("trai-tim-an.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+    .typing {
+  color: #d81b60;
+  font-size: 20px;
+  padding: 20px;
+  white-space: pre-line;
+  overflow: visible;
+  width: 100%;
+  max-width: 90vw;
+  margin: 20px auto;
+  text-align: center;
+}
+
+    .gift-box {
+      width: 150px;
+      height: 150px;
+      background: pink;
+      border: 3px solid #d81b60;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      animation: float 3s ease-in-out infinite;
+      z-index: 5;
+    }
+
+    .gift-box::before {
+      content: "🎁";
+      font-size: 60px;
+    }
+
+    .gift-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background: #fff0f5;
+      border: 2px solid #d81b60;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 10;
+      visibility: hidden;
+    }
+
+    .gift-content.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .gift-content img {
+      width: 200px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .gift-content p {
+      font-size: 20px;
+      color: #880e4f;
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #d81b60;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-10px); }
+    }
+
+    .heart, .snow {
+      position: fixed;
+      top: -20px;
+      font-size: 20px;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+  .heart, .snow {
+  position: fixed;
+  top: -20px;
+  font-size: 24px; /* tăng kích thước */
+  animation: fall linear infinite;
+  pointer-events: none;
+  z-index: 999;
+}
+
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    .iloveu {
+      position: absolute;
+      color: red;
+      font-size: 20px;
+      pointer-events: none;
+      animation: rise 1.5s forwards;
+      z-index: 200;
+    }
+
+    @keyframes rise {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-50px); }
+    }
+
+    #music-control {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+ 
+#typed-text {
+  font-size: 40px;
+  font-weight: bold;
+  color: #c084fc !important;
+  white-space: pre-line;
+  word-wrap: break-word;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px black;
+ text-align: center;
+    margin: 20px auto;
+    max-width: 90vw;
+  }
+  </style>
+>
+</head>
+<body>
+
+<div class="typewriter">
+  <h1 id="typed-text"></h1>
+</div>
+ 
+  <div class="gift-box" onclick="showGift()"></div>
+
+  <div class="gift-content" id="giftContent">
+    <button class="close-btn" onclick="closeGift()">✖</button>
+    <img id="giftImage" src="" alt="Gift">
+    <p id="randomWish">Lời chúc sẽ hiện ở đây</p>
+    <div style="font-size: 40px;">❤️</div>
+  </div>
+
+  <div id="music-control">
+    <button onclick="toggleMusic()">🎵 Nhạc</button>
+   <iframe id="music" width="0" height="0"
+  src="https://www.youtube.com/embed/nj5QDs_f1J8?autoplay=1&loop=1&playlist=nj5QDs_f1J8"
+  frameborder="0" allow="autoplay" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    // Typing Effect
+    const txt = "Gửi tặng người anh thương(VNThúy An) 💖.\nAnh chẳng biết phải bắt đầu từ đâu, chỉ biết rằng từ khi em xuất hiện, mọi điều trong anh như thay đổi.Có thể anh không hoàn hảo,Nhưng tình cảm anh dành cho em là chân thành, giản dị và luôn hướng về em từng chút một.Cảm ơn em đã đến, đã ở lại, và cho anh được thương một người theo cách trọn vẹn nhất. Nếu có thể, anh mong mình sẽ cùng nhau đi qua cả những ngày bình yên lẫn giông gió.\nVì chỉ cần là em – mọi thứ đều xứng đáng.";
+    let i = 0;
+    function typing() {
+      if (i < txt.length) {
+        document.getElementById("typed-text").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typing, 110);
+      }
+    }
+    typing();
+
+    // Random wishes and images
+    const wishes = [
+      "Anh yêu em nhiều lắm 💖",
+      "Chúc em luôn cười tươi như bây giờ 💐",
+      "Em là món quà tuyệt vời nhất 🎁",
+      "Yêu em từng giây từng phút 💘",
+      "Mỗi ngày bên em là một phép màu 🌟"
+    ];
+
+    const images = [
+      "gift.jpg",
+      "tay-cam-hop-qua.jpg",
+      "tao-kieu-nui-ba-ra.jpg",
+      "anh-chup-anh-va-em.jpg",
+      "sau-be.jpg",
+      "trai-tim-be.png",
+      "backgroud-be-an.png"
+    ];
+
+    function showGift() {
+      const gift = document.getElementById("giftContent");
+      const wish = wishes[Math.floor(Math.random() * wishes.length)];
+      const img = images[Math.floor(Math.random() * images.length)];
+      document.getElementById("randomWish").innerText = wish;
+      document.getElementById("giftImage").src = img;
+      gift.classList.add("show");
+    }
+
+    function closeGift() {
+      const gift = document.getElementById("giftContent");
+      gift.classList.remove("show");
+    }
+
+    // Falling hearts
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+      heart.innerText = "💖";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+
+    // Falling snow
+    setInterval(() => {
+      let snow = document.createElement("div");
+      snow.className = "snow";
+      snow.style.left = Math.random() * window.innerWidth + "px";
+      snow.style.animationDuration = (3 + Math.random() * 2) + "s";
+      snow.innerText = "❄️";
+      document.body.appendChild(snow);
+      setTimeout(() => snow.remove(), 5000);
+    }, 400);
+
+    // Click to show "I love u"
+    document.addEventListener("click", function(e) {
+      let text = document.createElement("div");
+      text.className = "iloveu";
+      text.style.left = e.pageX + "px";
+      text.style.top = e.pageY + "px";
+      text.textContent = "I love u";
+      document.body.appendChild(text);
+      setTimeout(() => text.remove(), 1500);
+    });
+
+    // Music control
+    let isPlaying = true;
+    function toggleMusic() {
+      const music = document.getElementById("music");
+      if (isPlaying) {
+        music.src = "";
+      } else {
+        music.src = "https://www.youtube.com/embed/nj5QDs_f1J8?autoplay=1&loop=1&playlist=nj5QDs_f1J8";
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
+</body>
+</html>
